@@ -67,7 +67,7 @@ export async function updateOrders(clientAddress, position, amount, tradeProduct
 
 export async function updateSettled(orderId) {
     try {
-        await axios.get(
+        await axios.post(
             `http://localhost:8080/api/orders/updateSettled/${orderId}`,
         );
     } catch (error) {
@@ -109,7 +109,8 @@ export async function getOpenedPosition(setOpenedPosition, address) {
                 position: item.position,
                 option: item.option,
                 tokenId: item.tokenId,
-                settled: item.settled
+                settled: item.settled,
+                strikeIndex: item.strikeIndex
             };
         });
         console.log('opened position:', position)
@@ -123,7 +124,7 @@ export async function getOpenedPosition(setOpenedPosition, address) {
 export async function getClosedPosition(setClosedPosition, address) {
     try {
         const response = await axios.get(
-            `http://localhost:8080/api/orders/historicalPosition?${address}`,
+            `http://localhost:8080/api/orders/historicalPosition?address=${address}`,
         );
         const data = response.data;
         const position = data.map(item => {

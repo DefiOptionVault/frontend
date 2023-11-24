@@ -116,9 +116,9 @@ export async function settle(position) {
         const clientAddress = await signer.getAddress();
         
         console.log('settle param check', strikeIndex, amount, round, clientAddress);
-        // const contract = new ethers.Contract(contractAddress, DOV_ABI, signer);
-        // const txn = await contract.settle(strikeIndex, amount, round, clientAddress);
-        // await txn.wait();
+        const contract = new ethers.Contract(contractAddress, DOV_ABI, signer);
+        const txn = await contract.settle(strikeIndex, amount, round, clientAddress);
+        await txn.wait();
         
         // update backend
         updateSettled(position.orderId);
@@ -140,9 +140,9 @@ export async function withdraw(position) {
         const clientAddress = await signer.getAddress();
         
         console.log('settle param check', tokenId, clientAddress);
-        // const contract = new ethers.Contract(contractAddress, DOV_ABI, signer);
-        // const txn = await contract.withdraw(tokenId, clientAddress);
-        // await txn.wait();
+        const contract = new ethers.Contract(contractAddress, DOV_ABI, signer);
+        const txn = await contract.withdraw(tokenId, clientAddress);
+        await txn.wait();
 
         updateSettled(position.orderId);
     } catch(error) {

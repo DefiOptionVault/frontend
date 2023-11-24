@@ -3,9 +3,9 @@ import { useState, useCallback, useEffect } from 'react';
 import './Position.scss';
 
 const PositionOpen = ({openedPosition}) => {
-    function sleep() {
-        return new Promise(resolve => setTimeout(resolve, 10 * 1000));
-      } 
+    // function sleep() {
+    //     return new Promise(resolve => setTimeout(resolve, 10 * 1000));
+    //   } 
     const [tradingStatus, setTradingStatus] = useState('default');
 
     const [loadingText, setLoadingText] = useState('Waiting Tx');
@@ -26,26 +26,28 @@ const PositionOpen = ({openedPosition}) => {
 
     const settleOption = useCallback(async (position) => {
         setTradingStatus('trading');
-        await sleep()
+        // await sleep()
         console.log('settle:', position);
-        if(position.settled === false) {
+        if(Number(position.settlement_price) === 0) {
             alert(`This Product didn't expired!\nexpiry:${position.expiry}`);
-            //return;
+            return;
         }
         await settle(position);
+        alert('Settle Success! plz refresh this page!');
         setTradingStatus('default');
     },[]);
 
     const withdrawOption = useCallback(async (position) => {
         setTradingStatus('trading');
-        await sleep();
+        // await sleep();
         console.log('withdraw:', position);
-        if(position.settled === false) {
+        if(Number(position.settlement_price) === 0) {
             alert(`This Product didn't expired!\nexpiry:${position.expiry}`);
-            //return;
+            return;
         }
 
         await withdraw(position);
+        alert('Withdraw Success! plz refresh this page!');
         setTradingStatus('default');
     }, []);
 
