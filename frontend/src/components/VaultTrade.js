@@ -46,7 +46,7 @@ const VaultTrade = ({tradeProduct}) => {
             return;
         }
         await purchaseOption(tradeProduct, buyValue, setTradingStatus);
-        alert('Purchase Success! plz refresh this page!');
+        
     }, [buyValue, tradeProduct]);
     const writeOption = useCallback(async () => {
         console.log(`Write ${writeValue} options`);
@@ -55,7 +55,7 @@ const VaultTrade = ({tradeProduct}) => {
             return;
         }
         await depositOption(tradeProduct, writeValue, setTradingStatus);
-        alert('Deposit Success! plz refresh this page!');
+        
     }, [writeValue, tradeProduct]);
 
     return (

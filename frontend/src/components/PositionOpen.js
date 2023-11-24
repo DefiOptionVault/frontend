@@ -33,7 +33,7 @@ const PositionOpen = ({openedPosition}) => {
             return;
         }
         await settle(position);
-        alert('Settle Success! plz refresh this page!');
+        
         setTradingStatus('default');
     },[]);
 
@@ -47,7 +47,7 @@ const PositionOpen = ({openedPosition}) => {
         }
 
         await withdraw(position);
-        alert('Withdraw Success! plz refresh this page!');
+        
         setTradingStatus('default');
     }, []);
 

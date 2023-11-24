@@ -4,11 +4,6 @@ import {
   Line,
   Tooltip,
   Legend,
-  AreaChart,
-  Area,
-  CartesianGrid,
-  XAxis,
-  YAxis,
   ResponsiveContainer,
 } from "recharts";
 import './PnLChart.scss';
@@ -37,43 +32,6 @@ const PnLChart = ({ isPut, strikePrice, optionPrice, amount }) => {
       indexPriceFuture += 10;
     }
   }
-  console.log(data);
-  // if (isPut) {
-  //   let indexPriceFuture = 500;
-  //   while(indexPriceFuture < strikePrice){
-  //     let profit = strikePrice - indexPriceFuture;
-  //     if (profit < 0) profit = 0;
-  //     const pnl = ((-optionPrice + profit) * amount / decimals).toFixed(6).replace(/(?:\.0+|(\.\d+?)0+)$/, "$1");
-  //     data.push({ indexPriceFuture, pnl });
-  //     indexPriceFuture += 10;
-  //   }
-  //   indexPriceFuture = strikePrice;
-  //   while(indexPriceFuture < strikePrice * 2){
-  //     let profit = strikePrice - indexPriceFuture;
-  //     if (profit < 0) profit = 0;
-  //     const pnl = ((-optionPrice + profit) * amount / decimals).toFixed(6).replace(/(?:\.0+|(\.\d+?)0+)$/, "$1");
-  //     data.push({ indexPriceFuture, pnl });
-  //     indexPriceFuture += 10;
-  //   }
-  // } else{
-  //   let indexPriceFuture = 0;
-  //   while(indexPriceFuture < strikePrice){
-  //     let profit = indexPriceFuture - strikePrice;
-  //     if (profit < 0) profit = 0;
-  //     const pnl = ((-optionPrice + profit) * amount / decimals).toFixed(6).replace(/(?:\.0+|(\.\d+?)0+)$/, "$1");
-  //     data.push({ indexPriceFuture, pnl });
-  //     indexPriceFuture += 10;
-  //   }
-  //   indexPriceFuture = strikePrice;
-  //   while(indexPriceFuture < strikePrice * 1.5){
-  //     let profit = indexPriceFuture - strikePrice;
-  //     if (profit < 0) profit = 0;
-  //     const pnl = ((-optionPrice + profit) * amount / decimals).toFixed(6).replace(/(?:\.0+|(\.\d+?)0+)$/, "$1");
-  //     data.push({ indexPriceFuture, pnl });
-  //     indexPriceFuture += 10;
-  //   }
-  // }
-
   return (
     <div className="chart-container">  
       <ResponsiveContainer width="100%" height="100%" >

@@ -47,13 +47,14 @@ export async function purchaseOption(tradeProduct, amount, setTradingStatus) {
         await txn.wait();
         setTradingStatus('default');
         console.log("Purchase successful:", txn.hash);
-
+        alert('Purchase Success! plz refresh this page!');
         // update trade info
         updateOrders(clientAddress, 'purchase', amount, tradeProduct);
         
     } catch(error) {
         setTradingStatus('default');
         console.error("Error in deposit:", error);
+        alert('Purchase fail! plz try again...');
     } 
 }
 
@@ -93,13 +94,14 @@ export async function depositOption(tradeProduct, amount, setTradingStatus) {
         setTradingStatus('default');
         console.log("receipt:", receipt);
         console.log('tokenId:', tokenId);
-
+        alert('Deposit Success! plz refresh this page!');
         // update trade info
         updateOrders(clientAddress, 'write', amount, tradeProduct, tokenId);
         
       } catch (error) {
         setTradingStatus('default');
         console.error("Error in deposit:", error);
+        alert('Deposit fail! plz try again...');
     } 
 }
 
@@ -119,11 +121,12 @@ export async function settle(position) {
         const contract = new ethers.Contract(contractAddress, DOV_ABI, signer);
         const txn = await contract.settle(strikeIndex, amount, round, clientAddress);
         await txn.wait();
-        
+        alert('Settle Success! plz refresh this page!');
         // update backend
         updateSettled(position.orderId);
     } catch(error) {
         console.log('ERROR WHILE SETTLE', error);
+        alert('Withdraw Error.. plz try again');
     }
     
 }
@@ -143,10 +146,11 @@ export async function withdraw(position) {
         const contract = new ethers.Contract(contractAddress, DOV_ABI, signer);
         const txn = await contract.withdraw(tokenId, clientAddress);
         await txn.wait();
-
+        alert('Withdraw Success! plz refresh this page!');
         updateSettled(position.orderId);
     } catch(error) {
         console.log('ERROR WHILE SETTLE', error);
+        alert('Withdraw Error.. plz try again');
     }
 }
 
@@ -161,7 +165,8 @@ export async function getAvailable(vault, round, setAvailables) {
         const signer = provider.getSigner();
         console.log(1);
         const contract = new ethers.Contract(vault[0].address, DOV_ABI, signer);
-        const result = await contract.getAvailable(round)
+        const result = await contract.getAvailable(round);
+        console.log('available result:', result);
         const avaialbes = result.map(normalizeDecimal);
         console.log('available reuslt', avaialbes);
         for (let i = 0; i < avaialbes.length; i++) {
