@@ -4,7 +4,7 @@ export async function fetchVaultList(setLoading, setVaults) {
     setLoading(true);
     try {
         const response = await axios.get(
-            'http://localhost:8080/api/options/get_option_info',
+            'http://3.35.11.99:8080/api/options/get_option_info',
         );
         const data = response.data;
         const formattedData = data.map(item =>  {
@@ -24,7 +24,7 @@ export async function fetchVaultInfo(setLoading, setVaultInfo, optionId) {
     setLoading(true);
     try {
         const response = await axios.get(
-            `http://localhost:8080/api/strikes/byOptionId?optionId=${optionId}`,
+            `http://3.35.11.99:8080/api/strikes/byOptionId?optionId=${optionId}`,
         );
         const data = response.data;
         console.log('VaultPrice api', data);
@@ -59,7 +59,7 @@ export async function updateOrders(clientAddress, position, amount, tradeProduct
     };
     console.log('update orders', data);
     try {
-        axios.post('http://localhost:8080/api/orders/sendPosition', data);
+        axios.post('http://3.35.11.99:8080/api/orders/sendPosition', data);
     } catch(e) {
         console.log(e)
     };
@@ -68,7 +68,7 @@ export async function updateOrders(clientAddress, position, amount, tradeProduct
 export async function updateSettled(orderId) {
     try {
         await axios.post(
-            `http://localhost:8080/api/orders/updateSettled/${orderId}`,
+            `http://3.35.11.99:8080/api/orders/updateSettled/${orderId}`,
         );
     } catch (error) {
         console.log('BACKEND ERROR UPDATE SETTLED COLUMN');
@@ -92,7 +92,7 @@ function formatDate(dateString) {
 export async function getOpenedPosition(setOpenedPosition, address) {
     try {
         const response = await axios.get(
-            `http://localhost:8080/api/orders/openedPosition?address=${address}`,
+            `http://3.35.11.99:8080/api/orders/openedPosition?address=${address}`,
         );
         const data = response.data;
         const position = data.map(item => {
@@ -124,7 +124,7 @@ export async function getOpenedPosition(setOpenedPosition, address) {
 export async function getClosedPosition(setClosedPosition, address) {
     try {
         const response = await axios.get(
-            `http://localhost:8080/api/orders/historicalPosition?address=${address}`,
+            `http://3.35.11.99:8080/api/orders/historicalPosition?address=${address}`,
         );
         const data = response.data;
         const position = data.map(item => {
