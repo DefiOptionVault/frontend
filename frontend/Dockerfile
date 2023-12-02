@@ -6,7 +6,7 @@ RUN adduser -D -g "" $USER
 
 WORKDIR /dov/frontend
 COPY package.json package-lock.json ./
-RUN npm install --legacy-peer-deps
+RUN yarn install
 COPY ./ ./
 
 USER $USER
