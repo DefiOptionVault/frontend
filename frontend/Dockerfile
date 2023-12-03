@@ -1,10 +1,16 @@
-FROM node:18.18.0-alpine
+FROM node:18-alpine
+
+ENV USER dov_frontend
+RUN adduser -D -g "" $USER
 
 WORKDIR /dov/frontend
-COPY package.json package-lock.json ./
-RUN yarn install
-COPY ./ ./
 
+COPY ./ ./
+RUN chown -R $USER /dov/frontend
+
+RUN yarn install
+
+USER $USER
 EXPOSE 3000
 
 CMD ["yarn", "start"]
