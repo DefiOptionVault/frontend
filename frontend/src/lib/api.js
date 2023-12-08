@@ -4,7 +4,7 @@ export async function fetchVaultList(setLoading, setVaults) {
     setLoading(true);
     try {
         const response = await axios.get(
-            'http://3.35.11.99:8080/api/options/get_option_info',
+            'http://3.35.11.99:8080/api/options/getValidOptionInfo',
         );
         const data = response.data;
         const formattedData = data.map(item =>  {

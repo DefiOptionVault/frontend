@@ -56,7 +56,7 @@ const VaultPrice = ({chosenVault, setTradePhase, setTradeProduct}) => {
                         <tr key={index}>
                             <td>{info.strikePrice} $</td>
                             <td>{availables[index]} </td>
-                            <td>{info.optionPrice} $</td>
+                            <td>{info.optionPrice.substr(0, 8)} $</td>
                             <td><div className='trade-button' onClick={() => doTrade(info, availables[index])}><b>Trade</b></div></td>
                         </tr>
                     )
